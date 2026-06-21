@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>说球帝 · 可信赛事信息导航</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(160deg, #fff3e0 0%, #ffe8d0 45%, #fddbb8 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px 60px;
+            color: #2c2b28;
+        }
+
+        /* 顶部导航 */
+        .nav {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px 0 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(180, 120, 70, 0.2);
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #b36a2e, #8f511f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5a3e28;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #a1662f;
+            border-bottom-color: #c6864a;
+        }
+
+        /* 主卡片容器 */
+        .wrapper {
+            max-width: 1100px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        /* 白色卡片通用 */
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 12px 30px rgba(160, 100, 50, 0.10);
+            padding: 36px 40px;
+            margin-bottom: 32px;
+            transition: box-shadow 0.25s;
+        }
+
+        .card:hover {
+            box-shadow: 0 16px 40px rgba(140, 90, 40, 0.12);
+        }
+
+        /* hero 区域 */
+        .hero {
+            text-align: center;
+            padding: 48px 36px 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #a8622d, #784a1f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #4a3d32;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #f1e3d4;
+            color: #6b4d30;
+            padding: 8px 22px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 6px;
+            border: 1px solid #ddcaba;
+        }
+
+        /* 核心介绍 */
+        .intro-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .intro-text {
+            flex: 2 1 300px;
+        }
+
+        .intro-text h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #543b24;
+            margin-bottom: 18px;
+            border-left: 5px solid #c28248;
+            padding-left: 16px;
+        }
+
+        .intro-text p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+            color: #3e342b;
+        }
+
+        .intro-highlight {
+            flex: 1 1 200px;
+            background: #faf3ea;
+            border-radius: 20px;
+            padding: 20px 22px;
+            border: 1px solid #e6d5c0;
+        }
+
+        .intro-highlight ul {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .intro-highlight li {
+            margin-bottom: 14px;
+            padding-left: 22px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="%23b36a2e"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') left 3px no-repeat;
+            background-size: 14px;
+            color: #4f3b28;
+        }
+
+        /* 三个场景模块 */
+        .scenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 10px;
+        }
+
+        .scene-card {
+            background: #fefcf9;
+            border-radius: 24px;
+            padding: 28px 22px 22px;
+            text-align: center;
+            border: 1px solid #eddccd;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(150, 90, 40, 0.08);
+        }
+
+        .scene-icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 14px;
+            background: #f5e6d8;
+            width: 54px;
+            height: 54px;
+            line-height: 54px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scene-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #5d412b;
+            margin-bottom: 10px;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4e3f32;
+        }
+
+        /* 常见说明 / FAQ摘要 */
+        .faq-summary {
+            margin-top: 8px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #efe3d6;
+            padding: 18px 0 14px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #4b3421;
+            margin-bottom: 6px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-q::before {
+            content: "⚬";
+            color: #b46f35;
+            font-size: 1.4rem;
+        }
+
+        .faq-a {
+            color: #51443a;
+            line-height: 1.6;
+            padding-left: 26px;
+            font-size: 0.95rem;
+        }
+
+        /* 底部链接区 */
+        .footer-note {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #6b5843;
+            border-top: 1px solid rgba(180, 140, 100, 0.25);
+            padding-top: 28px;
+        }
+
+        .footer-note a {
+            color: #8f5f30;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid #dbb58a;
+            padding-bottom: 1px;
+            transition: border-color 0.2s;
+        }
+
+        .footer-note a:hover {
+            border-bottom-color: #a1662f;
+        }
+
+        /* 响应式 */
+        @media (max-width: 720px) {
+            .nav {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            .nav-links {
+                gap: 22px;
+                flex-wrap: wrap;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .card {
+                padding: 24px 20px;
+            }
+            .intro-grid {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0 12px 40px;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .scene-card {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <span class="nav-brand">⚽ 说球帝</span>
+    <div class="nav-links">
+        <a href="#">概览</a>
+        <a href="#">场景</a>
+        <a href="#">说明</a>
+        <a href="#">动态</a>
+    </div>
+</nav>
+
+<div class="wrapper">
+
+    <!-- hero 区 -->
+    <div class="card hero">
+        <h1>赛事信息 · 轻量导航</h1>
+        <p>围绕足球与体育内容，<a href="https://index-shuoqiudi.com" style="color:#8f5f30; text-decoration: underline; font-weight: 600;">说球帝</a> 聚合实用信息路径，兼顾可信来源与快速定位。本页面向有明确信息需求的用户，提供结构化的索引与场景参考。</p>
+        <span class="tagline">⚡ 聚焦内容可信 · 减少信息过载</span>
+    </div>
+
+    <!-- 核心介绍 + 可信说明 -->
+    <div class="card">
+        <div class="intro-grid">
+            <div class="intro-text">
+                <h2>站点定位与可信视角</h2>
+                <p><strong>说球帝</strong> 并非单一资讯源，而是一个经过筛选的导航节点。我们关注内容来源的可靠性与可追溯性，避免模糊推荐与情绪化表述。日常赛事数据、球队动态及赛程索引均以可验证信息为基础。</p>
+                <p>页面内提供的每个链接与模块，均保持克制：不夸大功能、不引导非理性点击。如果你希望快速了解某支球队近况或联赛结构，通过 <a href="https://index-shuoqiudi.com" style="color:#8f5f30; font-weight: 500;">说球帝</a> 的索引路径可以节省大量检索时间。</p>
+                <p style="margin-top: 10px; font-size: 0.95rem; color: #6f5a45;">注：本介绍页仅展示信息架构，不存储比赛数据，所有跳转均指向公开可查内容。</p>
+            </div>
+            <div class="intro-highlight">
+                <div style="font-weight: 600; margin-bottom: 6px; color: #4f3823;">🔍 信息原则</div>
+                <ul>
+                    <li>来源可查，不出具模糊数据</li>
+                    <li>导航层级清晰，三步内定位</li>
+                    <li>不嵌入未经验证的第三方链接</li>
+                    <li>定期复核索引有效性</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div class="card" style="padding-bottom: 28px;">
+        <h2 style="font-size: 1.5rem; font-weight: 600; color: #543b24; margin-bottom: 22px; border-left: 5px solid #c28248; padding-left: 16px;">常用场景示例</h2>
+        <div class="scenes">
+            <div class="scene-card">
+                <span class="scene-icon">📅</span>
+                <h3>赛程快速索引</h3>
+                <p>按联赛、日期或球队筛选未来赛事。通过说球帝导航可直达权威赛程页面，无需多次跳转。</p>
+            </div>
+            <div class="scene-card">
+                <span class="scene-icon">🧩</span>
+                <h3>球队信息聚合</h3>
+                <p>整合近期战绩、阵容变动与新闻摘要，所有引用均标注原始出处，方便交叉核实。</p>
+            </div>
+            <div class="scene-card">
+                <span class="scene-icon">📋</span>
+                <h3>数据参考面板</h3>
+                <p>提供联赛积分、射手榜等静态快照，数据源公开且更新频率明确，适合赛前快速查阅。</p>
+            </div>
+        </div>
+        <p style="margin-top: 22px; font-size: 0.9rem; color: #705a44; background: #f7efe6; padding: 14px 18px; border-radius: 16px;">以上场景均围绕信息检索效率设计，不包含实时赔率、预测或任何形式的诱导内容。</p>
+    </div>
+
+    <!-- 常见说明 / FAQ摘要 -->
+    <div class="card faq-summary">
+        <h2 style="font-size: 1.4rem; font-weight: 600; color: #543b24; margin-bottom: 6px; border-left: 5px solid #c28248; padding-left: 16px;">常见说明</h2>
+        <div class="faq-item">
+            <div class="faq-q">说球帝的索引数据来自哪里？</div>
+            <div class="faq-a">主要参考各联赛官方、公开体育数据库及经核实的媒体源。我们不二次加工数据，仅提供结构化入口。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否需要注册或付费？</div>
+            <div class="faq-a">完全免费，且无需注册即可使用导航功能。部分外部目标页面可能要求登录，与本导航无关。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">页面内链接会定期更新吗？</div>
+            <div class="faq-a">是的，我们会周期性地检查链接有效性，并移除失效或变更的地址。如发现异常可通过页面反馈渠道告知。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">移动端访问体验如何？</div>
+            <div class="faq-a">本导航适配主流移动设备，卡片布局在窄屏下自动调整为纵向排列，核心功能不受影响。</div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        <p>信息导航 · 基于公开内容整理 · 不构成任何建议</p>
+        <p style="margin-top: 10px;">如需直接访问索引起点，可点击 <a href="https://index-shuoqiudi.com">说球帝</a> 进入信息总览。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
