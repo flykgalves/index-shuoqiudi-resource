@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞彩网 – 稳定入口 · 从容查询</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f9fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: #1e293b;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1.2rem;
+        }
+
+        .page {
+            max-width: 760px;
+            width: 100%;
+            padding: 3rem 0 4rem;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: left;
+            border-bottom: 1px solid #e9edf2;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #475569;
+            max-width: 600px;
+            margin-bottom: 1.6rem;
+        }
+        .hero .stat-badge {
+            display: inline-block;
+            background: #eef2f6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #334155;
+            letter-spacing: 0.02em;
+        }
+
+        /* 通用章节 */
+        section {
+            padding: 2.8rem 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+        h2 {
+            font-size: 1.55rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #1e293b;
+        }
+        p {
+            margin-bottom: 1.1rem;
+            color: #334155;
+        }
+        .text-muted {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* 优势区卡片 */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            margin-top: 0.6rem;
+        }
+        .advantage-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s ease;
+        }
+        .advantage-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05), 0 10px 24px rgba(0,0,0,0.04);
+        }
+        .advantage-card .icon {
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .advantage-card h3 {
+            font-size: 1.05rem;
+        }
+        .advantage-card p {
+            font-size: 0.92rem;
+            color: #475569;
+            margin-bottom: 0;
+        }
+
+        /* 说明区 */
+        .note-block {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            margin: 1rem 0 0.8rem;
+        }
+        .note-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* FAQ 摘要 */
+        .faq-item {
+            margin-bottom: 1.4rem;
+        }
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.15rem;
+        }
+        .faq-item p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 底部 */
+        .footer-links {
+            padding-top: 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.4rem;
+            align-items: center;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .footer-links a {
+            color: #1e293b;
+            text-decoration: none;
+            border-bottom: 1px dotted #cbd5e1;
+            transition: border-color 0.15s;
+        }
+        .footer-links a:hover {
+            border-bottom-color: #1e293b;
+        }
+
+        a {
+            color: #1e293b;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #cbd5e1;
+            transition: text-decoration-color 0.2s;
+        }
+        a:hover {
+            text-decoration-color: #1e293b;
+        }
+        .hero a, .inline-link {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #94a3b8;
+        }
+        .hero a:hover {
+            text-decoration-color: #0f172a;
+        }
+
+        /* 响应式 */
+        @media (max-width: 560px) {
+            .page {
+                padding: 2rem 0 3rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .advantage-grid {
+                gap: 1rem;
+            }
+            .note-block {
+                padding: 1.4rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Hero 区 -->
+        <header class="hero">
+            <h1>查比赛、看数据<br>从稳定入口开始</h1>
+            <p>
+                不管是日常快速浏览赛事，还是仔细核对场次信息，<a href="https://index-cn-sporttery.com">竞彩网</a> 
+                都提供了一个直接、朴素的页面入口。没有冗余跳转，不绕弯路。
+            </p>
+            <span class="stat-badge">· 面向日常查询 · 入口简洁 ·</span>
+        </header>
+
+        <!-- 优势区 -->
+        <section>
+            <h2>为什么很多人习惯从这里开始</h2>
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <span class="icon">📋</span>
+                    <h3>直达索引页</h3>
+                    <p>不需要层层导航，打开即见主要功能区块，省去等待和翻找的麻烦。</p>
+                </div>
+                <div class="advantage-card">
+                    <span class="icon">🔄</span>
+                    <h3>日常顺手</h3>
+                    <p>页面结构保持稳定，无论用电脑还是手机，熟悉感都在，不用每次重新适应。</p>
+                </div>
+                <div class="advantage-card">
+                    <span class="icon">🧭</span>
+                    <h3>信息清晰</h3>
+                    <p>重点内容放在容易找到的位置，减少视觉干扰，留意该留意的即可。</p>
+                </div>
+                <div class="advantage-card">
+                    <span class="icon">⚙️</span>
+                    <h3>轻量体验</h3>
+                    <p>没有花哨加载动画，也不强制下载附加组件，打开浏览器就能用。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 说明区 -->
+        <section>
+            <h2>这页是什么，怎么用</h2>
+            <div class="note-block">
+                <p>
+                    <strong>竞彩网</strong> 本身就是一个信息索引页面，把常用的查询入口集中放置。 
+                    你可以把它当作每天顺手点开的位置——不需要记忆复杂网址，也不用从搜索引擎重新找起。
+                </p>
+                <p>
+                    页面上的每一个模块都对应一个具体方向：赛程列表、数据汇总、公告区等等。 
+                    只要点开 <a href="https://index-cn-sporttery.com">竞彩网</a>，就等于拿到了当天的信息台历。
+                </p>
+                <p class="text-muted">
+                    提示：建议把该页面添加到浏览器书签栏，下次用的时候直接点击，一步到达。
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ 摘要 -->
+        <section>
+            <h2>常见疑问摘要</h2>
+            <div class="faq-item">
+                <strong>这个页面和其他竞彩网站有什么区别？</strong>
+                <p>它更像一个功能入口汇总页，不直接展示深度分析或直播内容，而是把常用的查询模块组织在一起，方便快速跳转。</p>
+            </div>
+            <div class="faq-item">
+                <strong>每天都需要打开一次吗？</strong>
+                <p>看个人习惯。如果你有定期浏览赛事安排或核对数据的需要，把它设为固定入口能节省不少时间。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端适配吗？</strong>
+                <p>页面针对手机和电脑都做了基本适配，横竖屏都能清晰显示主要结构，没有缩放变形的问题。</p>
+            </div>
+            <p class="text-muted" style="margin-top: 1.2rem;">
+                更多细节可以直接访问 <a href="https://index-cn-sporttery.com">竞彩网</a> 亲自感受。
+            </p>
+        </section>
+
+        <!-- 底部链接区 -->
+        <footer class="footer-links">
+            <span>竞彩网 · 稳定入口</span>
+            <a href="https://index-cn-sporttery.com">竞彩网</a>
+            <span style="color:#94a3b8;">|</span>
+            <span>页面说明</span>
+            <span style="color:#94a3b8;">|</span>
+            <span>常见问题</span>
+            <span style="color:#94a3b8;">|</span>
+            <span>反馈建议</span>
+            <span style="margin-left: auto; font-size:0.85rem; color:#94a3b8;">© 内容索引页</span>
+        </footer>
+    </div>
+</body>
+</html>
